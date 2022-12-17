@@ -1,6 +1,6 @@
 def application(environ, start_response):
     query = environ['QUERY_STRING'].split('&')
-    data = '\n'.join(query).encode('UTF-8')
+    data = [(s + '\n').encode('UTF-8') for s in query]
     
     status = '200 OK'
     response_headers = [
