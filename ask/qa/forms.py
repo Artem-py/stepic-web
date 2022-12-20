@@ -17,4 +17,8 @@ class AnswerForm(forms.ModelForm):
         fields = ['text', 'question']
 
 
-
+class SignUpForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        
