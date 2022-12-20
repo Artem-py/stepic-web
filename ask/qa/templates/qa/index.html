@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+  </head>
+  <body>
+    <h1>Hi there</h1>
+    <h5>Page number is {{ page_obj.number }}</h5>
+    <ul>
+      {% for question in page_obj.object_list %}
+        <li>
+          <a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

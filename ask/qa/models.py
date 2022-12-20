@@ -1,17 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class QuestionManager(models.Manager):
     def new(self):
-        pass
+        questions = super().order_by('-id')
+        return questions
 
     def popular(self):
-        pass
+        return self.order_by('-rating')
 
 
 class Question(models.Model):
-    title = models.CharField()
+    title = models.CharField(max_length=50)
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     rating = models.IntegerField(default=0)
@@ -19,6 +21,9 @@ class Question(models.Model):
     likes = models.ManyToManyField(User, blank=True, related_name='question_liked')
 
     objects = QuestionManager()
+
+    def get_absolute_url(self):
+        return reverse('question', args=[self.id])
     
 
 class Answer(models.Model):
