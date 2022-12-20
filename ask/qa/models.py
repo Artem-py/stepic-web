@@ -5,8 +5,7 @@ from django.urls import reverse
 
 class QuestionManager(models.Manager):
     def new(self):
-        questions = super().order_by('-id')
-        return questions
+        return self.order_by('-id')
 
     def popular(self):
         return self.order_by('-rating')
@@ -24,6 +23,9 @@ class Question(models.Model):
 
     def get_absolute_url(self):
         return reverse('question', args=[self.id])
+    
+    def __str__(self):
+        return self.title
     
 
 class Answer(models.Model):
